@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ScheduledMeetingRoom_backend.Data;
+using ScheduledMeetingRoom_backend.Models;
 using System.Text;
 
 namespace ScheduledMeetingRoom_backend
@@ -45,6 +46,10 @@ namespace ScheduledMeetingRoom_backend
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
+            #endregion
+
+            #region Ä appsettings.json ¹üc«@È¡ÄÚÈİ×¢ƒÔ OpenWeatherMapApi
+            builder.Services.Configure<OpenWeatherMapApi>(builder.Configuration.GetSection("SampleAPIEndpoints"));
             #endregion
 
             var app = builder.Build();

@@ -52,6 +52,23 @@ dotnet add package BCrypt.Net-Next
 ## 前端
 
 ```PowerShell
+# npm 配置
+npm help config
+npm config list --json
+# 獲取配置項值
+npm config get proxy
+npm config get https-proxy
+npm config get registry
+# 設置代理
+npm config set proxy=http://127.0.0.1:7890
+npm config set https-proxy=http://127.0.0.1:7890
+npm config set registry=https://registry.npmjs.org/
+# 取消代理
+npm config delete proxy
+npm config delete https-proxy
+npm config delete registry
+
+
 # 安裝 pnpm
 npm install --global pnpm
 # 創建項目
@@ -59,5 +76,11 @@ npm create vite@latest
 # 進入項目目錄
 npm install
 # 執行
-npm run serve
+npm run dev
+
+# 運行時自動打開瀏覽器
+# "dev": "vite --open",
+
+# eslint 配置 (https://zh-hans.eslint.org/)
+npm init @eslint/config
 ```

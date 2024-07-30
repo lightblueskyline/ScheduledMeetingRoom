@@ -50,3 +50,14 @@ dotnet add package BCrypt.Net-Next
 ```
 
 ## 前端
+
+```PowerShell
+# 安裝 pnpm
+npm install --global pnpm
+# 創建項目
+npm create vite@latest
+# 進入項目目錄
+npm install
+# 執行
+npm run serve
+```

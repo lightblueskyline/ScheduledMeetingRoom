@@ -1,6 +1,6 @@
 <script setup lang="ts" name="Login">
 import { ref } from "vue"
-import axios from "axios"
+import axiosInstance from "../utils/request"
 import { LoginRequest, LoginResponse } from '../types/auth'
 
 const username = ref("")
@@ -12,23 +12,18 @@ async function login() {
     let loginPayload: LoginRequest = {
         Email: username.value,
         Password: password.value
-    }
-    try {
-        axios.post('https://localhost:7292/api/Account/login', JSON.stringify(loginPayload), {
-            proxy: {
-                protocol: 'https',
-                host: '127.0.0.1',
-                port: 7292,
-            },
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(function (response) {
-            console.log(response)
-        }).catch((responseError) => console.log(responseError))
-    } catch (err) {
-        console.log(err)
-    }
+    };
+    axiosInstance.request({
+        url: 'Account/login',
+        method: 'post',
+        data: JSON.stringify(loginPayload)
+    }).then((response) => {
+        debugger
+        console.log(response);
+    }).catch((error) => {
+        debugger
+        console.log(error);
+    });
 }
 </script>
 

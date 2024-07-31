@@ -15,6 +15,9 @@ git config --global https.proxy socks5 127.0.0.1:7890
 # 配置 HTTP 代理
 git config --global http.proxy 127.0.0.1:7890
 git config --global https.proxy 127.0.0.1:7890
+#
+git config --global user.email "lightblueskyline@gamail.com"
+git config --global user.name "M_0v0_M"
 # 查看代理命令
 git config --global --get http.proxy
 git config --global --get https.proxy

@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script setup lang="ts" name="App">
+import Login from './components/Login.vue'
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <Login msg="Vite + Vue" />
 </template>
 
 <style scoped>

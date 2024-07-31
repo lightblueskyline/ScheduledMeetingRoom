@@ -84,6 +84,10 @@ npm run dev
 
 # eslint 配置 (https://zh-hans.eslint.org/)
 npm init @eslint/config
+
+# 插件，可在 <script setup lang="ts"> 中定義組件名稱 <script setup lang="ts" name="***">
+# -D, --save-dev: Package will appear in your devDependencies.
+npm install vite-plugin-vue-setup-extend -D
 ```
 
 ## 代碼備份

@@ -14,6 +14,10 @@ namespace ScheduledMeetingRoom_backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            #region Enable CORS in ASP.NET Core
+            builder.Services.AddCors();
+            #endregion
+
             #region Configure DbContext with SQLite
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
@@ -92,6 +96,15 @@ namespace ScheduledMeetingRoom_backend
             }
 
             app.UseHttpsRedirection();
+
+            #region Shows UseCors with CorsPolicyBuilder
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
+            #endregion
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -91,6 +91,10 @@ npm init @eslint/config
 # 插件，可在 <script setup lang="ts"> 中定義組件名稱 <script setup lang="ts" name="***">
 # -D, --save-dev: Package will appear in your devDependencies.
 npm install vite-plugin-vue-setup-extend -D
+
+# 路由
+npm install vue-router
+# 路由組件(依靠路由規則渲染)通常位於 pages & views 文件夾，一般組件(需要書寫標簽名稱展示的組件)通常位於 components
 ```
 
 ## 代碼備份

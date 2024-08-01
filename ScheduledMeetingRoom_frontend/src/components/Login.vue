@@ -15,17 +15,19 @@ async function login() {
     };
     try {
         // axiosInstance.defaults.headers.post['Content-Type'] = 'application/json'; // 可使用
-        const response = await axiosInstance.post<LoginResponse>("/Account/login",
+        await axiosInstance.post<LoginResponse>("/Account/login",
             JSON.stringify(loginPayload), {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            debugger
-            let { token } = response.data
+            let { Token } = response.data
+            // Store the JWT token in localStorage
+            localStorage.setItem('jwtToken', Token);
         }).catch(function (error) {
             debugger
             let { result } = error.response.data
+            console.log(result)
         });
     } catch (exception) {
         debugger

@@ -3,6 +3,8 @@
 ## Git 指令
 
 ```PowerShell
+# git adog
+git config --global alias.adog "log --all --decorate --oneline --graph"
 # 查看所有的配置以及所在文件
 git config --list --show-origin
 # 查看所有的配置

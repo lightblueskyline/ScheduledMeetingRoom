@@ -1,11 +1,14 @@
 <script setup lang="ts" name="Login">
 import { ref } from "vue"
-import axiosInstance from "../utils/axiosApiClient"
-import { LoginRequest, LoginResponse } from '../types/auth'
+import { LoginRequest } from '../types/auth'
+import { useUserStore } from '../store/modules/userStore'
+import { useRouter } from 'vue-router';
 
 const username = ref("admin@example.com")
 const password = ref("Admin@123456")
 const rememberme = ref(false)
+const userStore = useUserStore()
+const router = useRouter();
 
 async function login() {
     let loginPayload: LoginRequest = {
@@ -14,24 +17,11 @@ async function login() {
         RememberMe: rememberme.value
     };
     try {
-        // axiosInstance.defaults.headers.post['Content-Type'] = 'application/json'; // 可使用
-        await axiosInstance.post<LoginResponse>("/Account/login",
-            JSON.stringify(loginPayload), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function (response) {
-            let { Token } = response.data
-            // Store the JWT token in localStorage
-            localStorage.setItem('jwtToken', Token);
-        }).catch(function (error) {
-            debugger
-            let { result } = error.response.data
-            console.log(result)
-        });
-    } catch (exception) {
-        debugger
-        console.log(exception)
+        await userStore.userLogin(loginPayload);
+        // 跳轉至歡迎畫面
+        router.push('/')
+    } catch (error) {
+        console.log(error)
     }
 }
 </script>

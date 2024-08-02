@@ -1,14 +1,4 @@
 <script setup lang="ts" name="Welcome">
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-onMounted(() => {
-    setTimeout(() => {
-        router.push('/about');
-    }, 6000);
-})
 </script>
 
 <template>

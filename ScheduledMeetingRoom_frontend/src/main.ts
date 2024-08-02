@@ -20,4 +20,7 @@ app.use(ElementPlus, {
     locale: zhCn,
 })
 
+// 打印當前環境變量内容
+console.log(import.meta.env)
+
 app.mount('#app')

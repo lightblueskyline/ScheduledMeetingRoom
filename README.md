@@ -105,6 +105,9 @@ npm install pinia
 npm install element-plus
 # Element Plus Component: Icon
 npm install @element-plus/icons-vue
+
+# 環境變量的配置
+# 項目根目錄下添加 .env.development
 ```
 
 ## 代碼備份

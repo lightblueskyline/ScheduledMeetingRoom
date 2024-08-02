@@ -96,8 +96,13 @@ npm install vite-plugin-vue-setup-extend -D
 npm install vue-router
 # 路由組件(依靠路由規則渲染)通常位於 pages & views 文件夾，一般組件(需要書寫標簽名稱展示的組件)通常位於 components
 
-# 倉庫
+# 狀態管理
 npm install pinia
+
+# Element Plus
+npm install element-plus
+# Element Plus Component: Icon
+npm install @element-plus/icons-vue
 ```
 
 ## 代碼備份

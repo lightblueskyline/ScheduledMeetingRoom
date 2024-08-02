@@ -3,8 +3,21 @@ import './style.css'
 import App from './App.vue'
 import router from './router/index' // 路由
 import pinia from './store/index' // 狀態管理
+import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn' // 配置 Element Plus 國際化
+import 'element-plus/dist/index.css'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue' // Register All Icons globally
 
 const app = createApp(App)
-app.use(pinia)
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
+
 app.use(router)
+app.use(pinia)
+app.use(ElementPlus, {
+    locale: zhCn,
+})
+
 app.mount('#app')

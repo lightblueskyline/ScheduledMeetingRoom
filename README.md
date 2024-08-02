@@ -108,6 +108,10 @@ npm install @element-plus/icons-vue
 
 # 環境變量的配置
 # 項目根目錄下添加 .env.development
+
+# 集成 Sass
+npm install -D sass
+# 清除默認樣式 reset.scss
 ```
 
 ## 代碼備份

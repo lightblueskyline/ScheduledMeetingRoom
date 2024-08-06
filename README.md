@@ -112,6 +112,15 @@ npm install @element-plus/icons-vue
 # 集成 Sass
 npm install -D sass
 # 清除默認樣式 reset.scss
+
+# mock 接口
+npm install -D mockjs
+npm install -D vite-plugin-mock
+npm install -D mockjs vite-plugin-mock
+npm install vite-plugin-mock mockjs --save-dev
+
+# axios
+npm install axios
 ```
 
 ## 代碼備份

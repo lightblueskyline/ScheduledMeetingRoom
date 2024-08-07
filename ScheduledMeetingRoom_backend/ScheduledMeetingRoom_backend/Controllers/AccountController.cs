@@ -73,10 +73,9 @@ namespace ScheduledMeetingRoom_backend.Controllers
                 if (result.Succeeded)
                 {
                     var token = GenerateJwtToken(user);
-                    return Ok(new { Token = token });
+                    return Ok(new { Token = token, User = user });
                 }
             }
-
             return Unauthorized(new { Result = "Invalid login attempt" });
         }
 

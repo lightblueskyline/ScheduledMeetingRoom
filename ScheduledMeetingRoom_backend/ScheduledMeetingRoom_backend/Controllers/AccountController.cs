@@ -76,7 +76,6 @@ namespace ScheduledMeetingRoom_backend.Controllers
                     return Ok(new { Token = token });
                 }
             }
-
             return Unauthorized(new { Result = "Invalid login attempt" });
         }
 

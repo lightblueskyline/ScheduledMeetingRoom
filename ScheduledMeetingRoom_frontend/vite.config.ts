@@ -1,4 +1,4 @@
-import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
+import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
 
@@ -23,7 +23,30 @@ import vue from '@vitejs/plugin-vue'
 //   }
 // })
 
-export default ({ command }: ConfigEnv): UserConfigExport => {
+// export default defineConfig ({ command, mode }: ConfigEnv): UserConfigExport => {
+//   const env = loadEnv(mode, process.cwd(), '')
+//   return {
+//     plugins: [
+//       vue(),
+//       viteMockServe({
+//         // default
+//         mockPath: 'mock',
+//         enable: true,
+//       }),
+//     ],
+//     css: {
+//       preprocessorOptions: {
+//         scss: {
+//           javascriptEnabled: true,
+//           additionalData: '@import "./src/styles/variable.scss";'
+//         }
+//       }
+//     }
+//   }
+// }
+
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [
       vue(),
@@ -40,6 +63,9 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           additionalData: '@import "./src/styles/variable.scss";'
         }
       }
-    }
+    },
+    define: {
+      __APP_ENV__: JSON.stringify(env.VITE_APP_TITLE),
+    },
   }
-}
+})

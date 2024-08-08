@@ -13,8 +13,10 @@ axiosInstance.interceptors.request.use((config) => {
 })
 // 響應攔截器
 axiosInstance.interceptors.response.use((response) => {
+    debugger
     return response
 }, (error) => {
+    debugger
     // 處理 HTTP 網絡錯誤
     let msg = ''
     let status = error.response.status
@@ -41,7 +43,7 @@ axiosInstance.interceptors.response.use((response) => {
         type: 'error',
         message: msg
     })
-    return Promise.reject(error)
+    return Promise.reject(new Error(error.response.status))
 })
 
 export default axiosInstance

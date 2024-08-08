@@ -33,10 +33,10 @@
 import { ref, reactive } from "vue"
 import type { ComponentSize, FormProps, FormInstance, FormRules } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
-import type { LoginForm, LoginResponse } from '../../api/user/type'
-import axiosInstance from '../../utils/axiosInstance'
+import type { LoginForm } from '../../api/user/type'
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus'
+import { useUserStore } from "../../store/modules/userStore"
 
 const size = ref<ComponentSize>('large')
 const labelPosition = ref<FormProps['labelPosition']>('left')
@@ -52,6 +52,7 @@ const rules = reactive<FormRules<LoginForm>>({
     password: [{ required: true, message: '請輸入密碼', trigger: 'blur' }],
 })
 const router = useRouter();
+const userStore = useUserStore()
 
 /**
  * 提交登入表單
@@ -64,22 +65,30 @@ async function submitForm(formEl: FormInstance | undefined) {
     await formEl.validate((valid, fields) => {
         if (valid) {
             // 驗證成功，發送登入請求
-            axiosInstance({
-                url: '/Account/login',
-                method: 'post',
-                data: JSON.stringify(loginForm),
-                headers: { 'Content-Type': 'application/json' },
-            }).then(response => {
-                if (response.status === 200) {
-                    let loginResponse: LoginResponse = response.data
-                    // Store the JWT token in localStorage
-                    localStorage.setItem('jwtToken', loginResponse.token);
-                    // 登入成功，跳轉至歡迎畫面
+            userStore.userLogin(loginForm)
+                .then((response) => {
+                    debugger
+                    console.log(response)
                     router.push('/')
-                }
-            }).catch(error => {
-                console.log(error)
-            })
+                }).catch((error) => {
+                    console.log(error)
+                })
+            // axiosInstance({
+            //     url: '/Account/login',
+            //     method: 'post',
+            //     data: JSON.stringify(loginForm),
+            //     headers: { 'Content-Type': 'application/json' },
+            // }).then(response => {
+            //     if (response.status === 200) {
+            //         let loginResponse: LoginResponse = response.data
+            //         // Store the JWT token in localStorage
+            //         localStorage.setItem('jwtToken', loginResponse.token);
+            //         // 登入成功，跳轉至歡迎畫面
+            //         router.push('/')
+            //     }
+            // }).catch(error => {
+            //     console.log(error)
+            // })
         } else {
             // 驗證失敗
             ElMessage({

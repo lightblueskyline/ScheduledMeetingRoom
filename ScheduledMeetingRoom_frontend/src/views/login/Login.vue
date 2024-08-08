@@ -36,6 +36,7 @@ import { User, Lock } from '@element-plus/icons-vue'
 import type { LoginForm, LoginResponse } from '../../api/user/type'
 import axiosInstance from '../../utils/axiosInstance'
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus'
 
 const size = ref<ComponentSize>('large')
 const labelPosition = ref<FormProps['labelPosition']>('left')
@@ -81,6 +82,10 @@ async function submitForm(formEl: FormInstance | undefined) {
             })
         } else {
             // 驗證失敗
+            ElMessage({
+                message: '請輸入用戶名 & 密碼',
+                type: 'warning',
+            })
             console.log('錯誤提交！', fields)
         }
     })

@@ -13,10 +13,15 @@
 // 編程式路由導航
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus'
 
 const router = useRouter();
 
 onMounted(() => {
+    ElMessage({
+        message: '登錄成功',
+        type: 'success',
+    })
     // 展示歡迎畫面，之後跳轉至首頁
     setTimeout(() => {
         router.push('/home');

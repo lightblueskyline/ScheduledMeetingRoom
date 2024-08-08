@@ -8,7 +8,6 @@ let axiosInstance = axios.create({
 })
 // 請求攔截器
 axiosInstance.interceptors.request.use((config) => {
-    debugger
     // 返回配置對象
     return config
 })
@@ -22,16 +21,17 @@ axiosInstance.interceptors.response.use((response) => {
     let msg = ''
     let status = error.response.status
     switch (status) {
-        case '401':
-            msg = 'Token 過期'
+        case 401:
+            // msg = 'Token 過期'
+            msg = error.response.data.result
             break;
-        case '403':
+        case 403:
             msg = '無權訪問'
             break;
-        case '404':
+        case 404:
             msg = '請求地址錯誤'
             break;
-        case '500':
+        case 500:
             msg = '服務器故障'
             break;
         default:
@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use((response) => {
         type: 'error',
         message: msg
     })
-    return Promise.reject(error)
+    return Promise.reject(new Error(error.response.status))
 })
 
 export default axiosInstance

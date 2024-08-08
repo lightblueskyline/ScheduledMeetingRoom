@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { LoginRequest } from '../../types/auth' // 引入數據類型
-import axiosInstance from "../../utils/axiosApiClient"
+import type { LoginForm } from '../../api/user/type'
+import { requestLogin } from '../../api/user/index'
 
 // 選項式寫法
 export const useUserStore = defineStore('user', {
@@ -10,29 +10,15 @@ export const useUserStore = defineStore('user', {
     }),
     // 類似：方法
     actions: {
-        async userLogin(loginRequest: LoginRequest) {
+        async userLogin(loginForm: LoginForm) {
             let tempToken: string = ''
-            // axiosInstance.defaults.headers.post['Content-Type'] = 'application/json'; // 可使用
-            await axiosInstance.post("/Account/login",
-                JSON.stringify(loginRequest), {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function (response) {
-                if (response.status === 200) {
-                    let { token } = response.data
-                    tempToken = token
-                    // Store the JWT token in localStorage
-                    localStorage.setItem('jwtToken', token);
-                    // 返回成功的 promise
-                    return 'OK'
-                } else {
-                    return Promise.reject(new Error(response.status.toString()))
-                }
-            }).catch(function (error) {
-                return Promise.reject(new Error(error))
-            });
-            this.token = tempToken
+            let tempResponse = await requestLogin(loginForm)
+            if (tempResponse.token !== '') {
+                tempToken = tempResponse.token
+                return tempResponse
+            } else {
+                return Promise.reject(tempResponse.token)
+            }
         }
     },
     // 類似：計算屬性

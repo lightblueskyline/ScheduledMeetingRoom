@@ -1,52 +1,12 @@
-import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from 'vite'
-import { viteMockServe } from 'vite-plugin-mock'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { viteMockServe } from 'vite-plugin-mock'
+import path from 'path'
 
 // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [
-//     vue(),
-//     useMockServer({
-//       mockPath: 'mock', // Path to the mock data directory
-//       localEnabled: true, // Enable mock in local development
-//       prodEnabled: false, // Disable mock in production
-//     }),
-//   ],
-//   // Sass 全局變量配置
-//   css: {
-//     preprocessorOptions: {
-//       scss: {
-//         javascriptEnabled: true,
-//         additionalData: '@import "./src/styles/variable.scss";'
-//       }
-//     }
-//   }
-// })
-
-// export default defineConfig ({ command, mode }: ConfigEnv): UserConfigExport => {
-//   const env = loadEnv(mode, process.cwd(), '')
-//   return {
-//     plugins: [
-//       vue(),
-//       viteMockServe({
-//         // default
-//         mockPath: 'mock',
-//         enable: true,
-//       }),
-//     ],
-//     css: {
-//       preprocessorOptions: {
-//         scss: {
-//           javascriptEnabled: true,
-//           additionalData: '@import "./src/styles/variable.scss";'
-//         }
-//       }
-//     }
-//   }
-// }
-
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+  // 獲取環境變量
+  let env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [
       vue(),
@@ -56,11 +16,18 @@ export default defineConfig(({ command, mode }) => {
         enable: true,
       }),
     ],
+    resolve: {
+      alias: {
+        // 相對路徑別名配置，使用 @ 代替 src 文件夾路徑
+        '@': path.resolve('./src'),
+      }
+    },
+    // Sass 全局變量配置
     css: {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: '@import "./src/styles/variable.scss";'
+          additionalData: '@import "./src/styles/sassGlobalVariable.scss";'
         }
       }
     },

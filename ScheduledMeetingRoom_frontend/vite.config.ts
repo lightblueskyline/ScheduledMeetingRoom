@@ -56,6 +56,7 @@ export default defineConfig(({ command, mode }) => {
         enable: true,
       }),
     ],
+    // Sass 全局變量配置
     css: {
       preprocessorOptions: {
         scss: {

@@ -5,7 +5,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: 'Login', // 命名路由：以便權限管理
-        component: () => import('../views/Login.vue')
+        component: () => import('../views/login/Login.vue')
     },
     {
         path: '/',

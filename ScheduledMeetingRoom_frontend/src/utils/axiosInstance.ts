@@ -8,16 +8,13 @@ let axiosInstance = axios.create({
 })
 // 請求攔截器
 axiosInstance.interceptors.request.use((config) => {
-    debugger
     // 返回配置對象
     return config
 })
 // 響應攔截器
 axiosInstance.interceptors.response.use((response) => {
-    debugger
     return response
 }, (error) => {
-    debugger
     // 處理 HTTP 網絡錯誤
     let msg = ''
     let status = error.response.status

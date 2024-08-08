@@ -1,3 +1,4 @@
+
 export interface LoginForm {
     email: string,
     password: string,
@@ -20,6 +21,7 @@ interface User {
     lockoutEnabled: boolean,
     accessFailedCount: number,
 }
+
 export interface LoginResponse {
     token: string,
     user: User

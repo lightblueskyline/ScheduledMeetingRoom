@@ -121,6 +121,9 @@ npm install vite-plugin-mock mockjs --save-dev
 
 # axios
 npm install axios
+
+# process.cwd()
+npm i --save-dev @types/node
 ```
 
 ## 代碼備份

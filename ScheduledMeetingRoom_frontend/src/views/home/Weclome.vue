@@ -1,16 +1,28 @@
-<script setup lang="ts" name="Welcome">
-</script>
-
 <template>
     <div class="hero">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
-            <img src="../../assets/img/hero-img.svg" class="img-fluid animated" alt="">
+            <img src="../../assets/images/hero-img.svg" class="img-fluid animated" alt="">
             <br>
             <h1>...&nbsp;歡&nbsp;迎&nbsp;...</h1>
         </div>
     </div>
 </template>
+
+<script setup lang="ts" name="Welcome">
+// 編程式路由導航
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+onMounted(() => {
+    // 展示歡迎畫面，之後跳轉至首頁
+    setTimeout(() => {
+        router.push('/home');
+    }, 3000);
+})
+</script>
 
 <style scoped lang="scss">
 .hero {

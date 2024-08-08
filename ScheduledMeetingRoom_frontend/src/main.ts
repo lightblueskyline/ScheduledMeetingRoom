@@ -14,6 +14,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
+// 注冊模板路由
 app.use(router)
 app.use(pinia)
 app.use(ElementPlus, {

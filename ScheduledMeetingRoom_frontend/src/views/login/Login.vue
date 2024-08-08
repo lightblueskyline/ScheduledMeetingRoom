@@ -2,6 +2,8 @@
     <div class="login-form">
         <el-form ref="ruleFormRef" style="max-width: 600px;" :model="loginForm" :rules="rules" label-width="auto"
             :label-position="labelPosition" :size="size">
+            <h3>...歡迎...</h3>
+            <br>
             <el-form-item label="用戶名：" prop="email">
                 <el-input v-model="loginForm.email" :prefix-icon="User" clearable></el-input>
             </el-form-item>
@@ -94,6 +96,13 @@ function resetForm(formEl: FormInstance | undefined) {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    h3 {
+        display: flex;
+        justify-content: center;
+        font-size: xx-large;
+        color: $global-color-red;
+    }
 
     .btn-box {
         display: flex;

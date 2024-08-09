@@ -8,7 +8,7 @@ enum API {
 }
 
 // 暴漏請求函數
-export const requestLogin = (param: LoginForm) => axiosInstance.post<any, LoginResponse>(API.LOGIN_URL, param, {
+export const requestLogin = async (param: LoginForm) => axiosInstance.post<any, LoginResponse>(API.LOGIN_URL, param, {
     headers: { 'Content-Type': 'application/json' },
 })
 

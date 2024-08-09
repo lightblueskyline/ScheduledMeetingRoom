@@ -65,37 +65,18 @@ async function submitForm(formEl: FormInstance | undefined) {
     await formEl.validate((valid, fields) => {
         if (valid) {
             // 驗證成功，發送登入請求
-            userStore.userLogin(loginForm)
-                .then((response) => {
-                    debugger
-                    console.log(response)
-                    router.push('/')
-                }).catch((error) => {
-                    console.log(error)
-                })
-            // axiosInstance({
-            //     url: '/Account/login',
-            //     method: 'post',
-            //     data: JSON.stringify(loginForm),
-            //     headers: { 'Content-Type': 'application/json' },
-            // }).then(response => {
-            //     if (response.status === 200) {
-            //         let loginResponse: LoginResponse = response.data
-            //         // Store the JWT token in localStorage
-            //         localStorage.setItem('jwtToken', loginResponse.token);
-            //         // 登入成功，跳轉至歡迎畫面
-            //         router.push('/')
-            //     }
-            // }).catch(error => {
-            //     console.log(error)
-            // })
+            userStore.userLogin(loginForm).then(() => {
+                router.push('/')
+            }).catch((error) => {
+                console.log(error)
+            })
         } else {
             // 驗證失敗
+            console.log('error submit!', fields)
             ElMessage({
                 message: '請輸入用戶名 & 密碼',
                 type: 'warning',
             })
-            console.log('錯誤提交！', fields)
         }
     })
 }

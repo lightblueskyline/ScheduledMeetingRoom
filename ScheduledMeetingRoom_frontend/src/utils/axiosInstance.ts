@@ -1,22 +1,31 @@
-// 對 axios 進行二次封裝
+// 對 Axios 進行二次封裝
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
+// 創建 Axios 實例
 let axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
     timeout: 6000
 })
+
 // 請求攔截器
 axiosInstance.interceptors.request.use((config) => {
+    // Do something before request is sent
     // 返回配置對象
     return config
+}, (error) => {
+    // Do something with request error
+    return Promise.reject(error)
 })
+
 // 響應攔截器
 axiosInstance.interceptors.response.use((response) => {
-    debugger
-    return response
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response.data
 }, (error) => {
-    debugger
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
     // 處理 HTTP 網絡錯誤
     let msg = ''
     let status = error.response.status
@@ -41,9 +50,9 @@ axiosInstance.interceptors.response.use((response) => {
     // 提示錯誤信息
     ElMessage({
         type: 'error',
-        message: msg
+        message: `${status}-${msg}`
     })
-    return Promise.reject(new Error(error.response.status))
+    return Promise.reject(error)
 })
 
 export default axiosInstance

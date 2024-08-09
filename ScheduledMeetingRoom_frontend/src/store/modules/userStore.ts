@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { LoginForm } from '../../api/user/type'
+import type { LoginForm, LoginResponse } from '../../api/user/type'
 import { requestLogin } from '../../api/user/index'
 
 // 選項式寫法
@@ -11,14 +11,14 @@ export const useUserStore = defineStore('user', {
     // 類似：方法
     actions: {
         async userLogin(loginForm: LoginForm) {
-            let tempToken: string = ''
-            let tempResponse = await requestLogin(loginForm)
-            if (tempResponse.token !== '') {
-                tempToken = tempResponse.token
-                return tempResponse
-            } else {
-                return Promise.reject(tempResponse.token)
-            }
+            await requestLogin(loginForm).then((response) => {
+                let tempResponse: LoginResponse = response
+                this.token = tempResponse.token
+                localStorage.setItem('jwtToken', tempResponse.token)
+                return 'OK'
+            }).catch((error) => {
+                return Promise.reject(error)
+            })
         }
     },
     // 類似：計算屬性

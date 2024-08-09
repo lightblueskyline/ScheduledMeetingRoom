@@ -9,16 +9,25 @@
                     :label-position="labelPosition" :size="size" class="login-form">
                     <h1>...歡迎...</h1>
                     <h2>XXX_XXX_XXX</h2>
-                    <el-form-item label="" prop="email">
+                    <el-form-item prop="email">
+                        <template #label>
+                            <span style="color: whitesmoke;">用戶名：</span>
+                        </template>
                         <el-input v-model="loginForm.email" :prefix-icon="User" clearable></el-input>
                     </el-form-item>
-                    <el-form-item label="" prop="password">
+                    <el-form-item prop="password">
+                        <template #label>
+                            <span style="color: whitesmoke;">密碼：</span>
+                        </template>
                         <el-input v-model="loginForm.password" type="password" :prefix-icon="Lock" clearable
                             show-password></el-input>
                     </el-form-item>
-                    <!-- <el-form-item label="記住我">
+                    <el-form-item>
+                        <template #label>
+                            <span style="color: whitesmoke;">記住我：</span>
+                        </template>
                         <el-checkbox v-model="loginForm.rememberMe"></el-checkbox>
-                    </el-form-item> -->
+                    </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm(ruleFormRef)">登入</el-button>
                         <el-button @click="resetForm(ruleFormRef)">重置</el-button>
@@ -62,7 +71,7 @@ async function submitForm(formEl: FormInstance | undefined) {
     if (!formEl) {
         return
     }
-    await formEl.validate((valid, fields) => {
+    formEl.validate((valid, fields) => {
         if (valid) {
             // 驗證成功，發送登入請求
             userStore.userLogin(loginForm).then(() => {

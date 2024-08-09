@@ -13,12 +13,13 @@
 // 編程式路由導航
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus'
+import { ElNotification } from 'element-plus'
 
 const router = useRouter();
 
 onMounted(() => {
-    ElMessage({
+    ElNotification({
+        title: '成功',
         message: '登錄成功',
         type: 'success',
     })

@@ -22,7 +22,13 @@ interface User {
     accessFailedCount: number,
 }
 
-export interface LoginResponse {
+interface ResponseData {
+    message?: string,
     token?: string,
-    user: User
+    user?: User
+}
+
+export interface LoginResponse {
+    status?: number,
+    responseData?: ResponseData
 }

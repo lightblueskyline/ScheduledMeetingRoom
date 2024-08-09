@@ -22,7 +22,7 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use((response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    return response.data
+    return response
 }, (error) => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use((response) => {
     switch (status) {
         case 401:
             // msg = 'Token 過期'
-            msg = error.response.data.result
+            msg = error.response.data.message
             break;
         case 403:
             msg = '無權訪問'

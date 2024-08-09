@@ -1,6 +1,6 @@
 // 統一管理用戶相關接口
 import axiosInstance from "../../utils/axiosInstance";
-import type { LoginForm, LoginResponse } from './type'
+import type { LoginForm } from './type'
 
 enum API {
     LOGIN_URL = '/Account/login',
@@ -8,7 +8,7 @@ enum API {
 }
 
 // 暴漏請求函數
-export const requestLogin = async (param: LoginForm) => axiosInstance.post<any, LoginResponse>(API.LOGIN_URL, param, {
+export const requestLogin = async (param: LoginForm) => axiosInstance.post(API.LOGIN_URL, param, {
     headers: { 'Content-Type': 'application/json' },
 })
 

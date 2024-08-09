@@ -14,13 +14,14 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElNotification } from 'element-plus'
+import { getHourMatchingMessage } from '../../utils/tools'
 
 const router = useRouter();
 
 onMounted(() => {
     ElNotification({
-        title: '成功',
-        message: '登錄成功',
+        title: '登錄成功',
+        message: getHourMatchingMessage(),
         type: 'success',
     })
     // 展示歡迎畫面，之後跳轉至首頁
